@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assetsImages/Cocacola.png', width: 75, height: 75),
+            Image.asset('AssetsImages/Cocacola.png', width: 75, height: 75),
             const SizedBox(height: 10),
             const Text('Has aplastado este boton esta cantidad de veces:'),
             Text(
@@ -77,8 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Center(
             heightFactor: 1,
             child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Nuevo boton'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SecondView()),
+                );
+              },
+              child: const Text('Cambiar a nueva view'),
             ),
           ),
         ),
@@ -108,6 +113,31 @@ class _MyHomePageState extends State<MyHomePage> {
             child: const Icon(Icons.refresh),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class SecondView extends StatelessWidget {
+  const SecondView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('AssetsImages/Cocacola.png', width: 75, height: 75),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Regresar'),
+            ),
+          ],
+        ),
       ),
     );
   }
