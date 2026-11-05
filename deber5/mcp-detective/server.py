@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from mcp.server import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
 
 RUTA_CASOS = Path(__file__).resolve().parent / "casos.json"
 NIVELES_VALIDOS = ("bajo", "medio", "alto")
@@ -115,7 +116,10 @@ def consultar_eventos(caso_id: str) -> list[dict]:
     Raises:
         ValueError: Si el caso no existe.
     """
-    return logica_consultar_eventos(CASOS, caso_id)
+    try:
+        return logica_consultar_eventos(CASOS, caso_id)
+    except ValueError as error:
+        raise ToolError(str(error)) from error
 
 
 @mcp.tool()
@@ -134,7 +138,10 @@ def registrar_alerta(caso_id: str, nivel: str, motivo: str) -> dict:
         ValueError: Si el caso no existe, el nivel es inválido, el motivo está
             vacío o ya hay una alerta registrada para ese caso.
     """
-    return logica_registrar_alerta(CASOS, ALERTAS, caso_id, nivel, motivo)
+    try:
+        return logica_registrar_alerta(CASOS, ALERTAS, caso_id, nivel, motivo)
+    except ValueError as error:
+        raise ToolError(str(error)) from error
 
 
 if __name__ == "__main__":
