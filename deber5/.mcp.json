@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "detective": {
+      "type": "stdio",
+      "command": "C:\\Python315\\python.exe",
+      "args": ["C:\\Proyectos flutter\\Repo-Samuel\\deber5\\mcp-detective\\server.py"]
+    }
+  }
+}
